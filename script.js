@@ -28,11 +28,14 @@ function renderBookList(bookList) {
 
   const item = document.getElementById("item");
   item.addEventListener("mouseover", (event) => {
-    event.target.insertAdjacentHTML('beforeend', `<div class="book-list rounded-md border-2 border-blue-400 bg-white w-full mx-auto" id="item"></div>`);
+    event.target.insertAdjacentHTML('beforeend', `<div class="book-list rounded-md border-2 border-blue-400 bg-white w-full mx-auto" id="info"></div>`);
   }, false);
 
-  item.addEventListener('mouseleave', (event) => {
-    event.target.nextSibling.remove()
+  item.addEventListener('mouseout', (event) => {
+    let node = document.getElementById("info");
+    if (node.parentNode) {
+      node.parentNode.removeChild(node);
+    }
   });
 }
 
