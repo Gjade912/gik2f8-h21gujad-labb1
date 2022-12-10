@@ -1,6 +1,7 @@
 'use strict';
 
 let bookList = [];
+let book;
 
 window.addEventListener('load', () => {
   getAll().then((apiBooks) => (bookList = apiBooks));
@@ -28,7 +29,16 @@ function renderBookList(bookList) {
 
   const item = document.getElementById("item");
   item.addEventListener("mouseover", (event) => {
-    event.target.insertAdjacentHTML('beforeend', `<div class="book-list rounded-md border-2 border-blue-400 bg-white w-full mx-auto" id="info"></div>`);
+    event.target.insertAdjacentHTML('beforeend', `<div class="rounded-md border-4 border-blue-400 bg-white w-1/2 mx-auto z-10 absolute" id="info"></div>`);
+    const id = event.target.id; // Id found.
+    fetchBook(id);
+
+    let box = document.getElementById('info');
+    const onMouseMove = (e) =>{
+      box.style.left = (e.pageX + 10) + 'px';
+      box.style.top = e.pageY + 'px';
+    }
+    document.addEventListener('mousemove', onMouseMove);
   }, false);
 
   item.addEventListener('mouseout', (event) => {
@@ -39,8 +49,30 @@ function renderBookList(bookList) {
   });
 }
 
+async function fetchBook(id){
+  const book = await getOne(id);
+  renderBook(book);
+}
 
+function renderBook(book) {
+  let html = `<p>Title: ${book.title}</p>`
+  info.insertAdjacentHTML('beforeend', html);
 
-function renderBookDetails(element) {
+  html = `<p>Author: ${book.author}</p>`
+  info.insertAdjacentHTML('beforeend', html);
 
+  if (book.coverImage != '') {
+    const img = new Image(100, 200);
+    img.src = book.coverImage;
+    info.appendChild(img);
+    img.className += "float-right";
+  }
+  html = `<p>Number of pages: ${book.pages}</p>`
+  info.insertAdjacentHTML('beforeend', html);
+
+  if (book.releaseDate != ""){
+    html = `<p>Release date: ${book.releaseDate}</p>`
+    info.insertAdjacentHTML('beforeend', html);
+    html=``;
+  }
 }

@@ -1,5 +1,5 @@
 const BookList = (bookList) => {
-  let html = `<ul class="book-list rounded-md border-2 border-blue-400 bg-white w-full mx-auto" id="item">`;
+  let html = `<ul class="book-list rounded-md border-2 border-blue-400 bg-white w-full mx-auto z-0" id="item">`;
   for (let i = 0; i < bookList.length; i++) {
     html += BookListItem(bookList[i]);
   }

@@ -7,3 +7,11 @@ async function getAll() {
 
   return result;
 }
+
+async function getOne(id) {
+  if (id != "info"){
+    const result = await fetch(url + '/' + id)
+    .then((result) => result.json())
+    return result;
+  }  
+}
