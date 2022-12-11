@@ -29,7 +29,7 @@ function renderBookList(bookList) {
 
   const item = document.getElementById("item");
   item.addEventListener("mouseover", (event) => {
-    event.target.insertAdjacentHTML('beforeend', `<div class="rounded-md border-4 border-blue-400 bg-white w-1/2 mx-auto z-10 absolute" id="info"></div>`);
+    event.target.insertAdjacentHTML('beforeend', `<div class="rounded-md border-4 border-blue-400 bg-white w-1/4 mx-auto z-10 absolute" id="info"></div>`);
     const id = event.target.id; // Id found.
     fetchBook(id);
 
